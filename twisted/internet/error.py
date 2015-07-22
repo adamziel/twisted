@@ -18,7 +18,7 @@ class BindError(Exception):
     """An error occurred binding to an interface"""
 
     def __str__(self):
-        s = self.__doc__
+        s = self.__doc__ or self.__class__.__name__
         if self.args:
             s = '%s: %s' % (s, ' '.join(self.args))
         s = '%s.' % s
@@ -60,7 +60,7 @@ class MessageLengthError(Exception):
     """Message is too long to send"""
 
     def __str__(self):
-        s = self.__doc__
+        s = self.__doc__ or self.__class__.__name__
         if self.args:
             s = '%s: %s' % (s, ' '.join(self.args))
         s = '%s.' % s
@@ -72,7 +72,7 @@ class DNSLookupError(IOError):
     """DNS lookup failed"""
 
     def __str__(self):
-        s = self.__doc__
+        s = self.__doc__ or self.__class__.__name__
         if self.args:
             s = '%s: %s' % (s, ' '.join(self.args))
         s = '%s.' % s
@@ -220,7 +220,7 @@ class ConnectionLost(ConnectionClosed):
     """Connection to the other side was lost in a non-clean fashion"""
 
     def __str__(self):
-        s = self.__doc__.strip().splitlines()[0]
+        s = self.__doc__.strip().splitlines()[0] if self.__doc__ else self.__class__.__name__
         if self.args:
             s = '%s: %s' % (s, ' '.join(self.args))
         s = '%s.' % s
@@ -242,7 +242,7 @@ class ConnectionDone(ConnectionClosed):
     """Connection was closed cleanly"""
 
     def __str__(self):
-        s = self.__doc__
+        s = self.__doc__ or self.__class__.__name__
         if self.args:
             s = '%s: %s' % (s, ' '.join(self.args))
         s = '%s.' % s
@@ -272,7 +272,7 @@ class AlreadyCalled(ValueError):
     """Tried to cancel an already-called event"""
 
     def __str__(self):
-        s = self.__doc__
+        s = self.__doc__ or self.__class__.__name__
         if self.args:
             s = '%s: %s' % (s, ' '.join(self.args))
         s = '%s.' % s
@@ -284,7 +284,7 @@ class AlreadyCancelled(ValueError):
     """Tried to cancel an already-cancelled event"""
 
     def __str__(self):
-        s = self.__doc__
+        s = self.__doc__ or self.__class__.__name__
         if self.args:
             s = '%s: %s' % (s, ' '.join(self.args))
         s = '%s.' % s
@@ -372,7 +372,7 @@ class NotConnectingError(RuntimeError):
     """The Connector was not connecting when it was asked to stop connecting"""
 
     def __str__(self):
-        s = self.__doc__
+        s = self.__doc__ or self.__class__.__name__
         if self.args:
             s = '%s: %s' % (s, ' '.join(self.args))
         s = '%s.' % s
@@ -384,7 +384,7 @@ class NotListeningError(RuntimeError):
     """The Port was not listening when it was asked to stop listening"""
 
     def __str__(self):
-        s = self.__doc__
+        s = self.__doc__ or self.__class__.__name__
         if self.args:
             s = '%s: %s' % (s, ' '.join(self.args))
         s = '%s.' % s
